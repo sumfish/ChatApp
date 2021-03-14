@@ -5,6 +5,7 @@
     <item
         android:id="@+id/logout"
         android:title="Logout"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
+        <!--不會出現在action bar 只會在選單裡-->
 
 </menu>

@@ -8,8 +8,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.chatapp.Model.User;
@@ -21,6 +25,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity {
@@ -30,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
 
     FirebaseUser firebaseUser;
     DatabaseReference ref;
+
+    ImageButton btn_send;
+    EditText txt_send;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +51,31 @@ public class MainActivity extends AppCompatActivity {
 
         profile_img=findViewById(R.id.profile_img);
         username=findViewById(R.id.user_name);
+        btn_send=findViewById(R.id.btn_send);
+        txt_send=findViewById(R.id.text_send);
 
         firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
+
+        btn_send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String msg=txt_send.getText().toString();
+                if(!msg.equals("")){
+                    //not assign receiver
+                    //如果開個人聊天室的話 可以用intent包 對象userid過來
+                    sendMessage(firebaseUser.getUid(),"",msg);
+                }else{
+                    Toast.makeText(MainActivity.this," You can't not send empty message",Toast.LENGTH_SHORT).show();
+                }
+                txt_send.setText("");
+            }
+        });
+
         ref= FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
 
+        /***
+         * 共同聊天室
+         ***/
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -66,8 +96,19 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void sendMessage(String sender, String receiver, String message){
+        DatabaseReference reference= FirebaseDatabase.getInstance().getReference();
+
+        HashMap<String, Object> hashmap= new HashMap<>();
+        hashmap.put("sender",sender);
+        hashmap.put("receiver",receiver);
+        hashmap.put("message",message);
+
+        reference.child("Chats").push().setValue(hashmap);
+    }
+
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu) { //load option menu
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
