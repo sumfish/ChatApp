@@ -66,13 +66,16 @@
             android:background="@android:color/transparent"
             android:layout_centerVertical="true"/>
 
-        <ImageButton
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@drawable/ic_action_send"
+            android:clickable="true"
+            android:src="@drawable/ic_action_send"
             android:id="@+id/btn_send"
+            android:tint="@android:color/white"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true" />
+            android:layout_alignParentRight="true"
+            app:fabSize="mini"/>
 
     </RelativeLayout>
 
