@@ -40,7 +40,7 @@ public class RegisterActivity extends AppCompatActivity {
         Toolbar toolbar=findViewById(R.id.toolbar);
         setSupportActionBar(toolbar); //取代actionBar
         getSupportActionBar().setTitle("Register");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //bar左方箭頭可回parent scene
 
         username=findViewById(R.id.username);
         email=findViewById(R.id.email);
@@ -67,7 +67,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    private void register(final String username, String email, String password){
+    private void register(final String username, String email, String password){ //sign up new user
         auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {

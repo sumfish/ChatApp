@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -49,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
                 if(TextUtils.isEmpty(txt_email)||TextUtils.isEmpty(txt_password)){
                     Toast.makeText(LoginActivity.this,"All fileds are required", Toast.LENGTH_SHORT).show();
                 }else{
+                    //sign in existing user
                     auth.signInWithEmailAndPassword(txt_email,txt_password).
                             addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                 @Override
@@ -59,6 +61,7 @@ public class LoginActivity extends AppCompatActivity {
                                         startActivity(intent);
                                         finish();
                                     }else{
+                                        Log.w("sign in", "signInWithEmail:failure", task.getException());
                                         Toast.makeText(LoginActivity.this,"Authentication failed",Toast.LENGTH_SHORT).show();
                                     }
                                 }
