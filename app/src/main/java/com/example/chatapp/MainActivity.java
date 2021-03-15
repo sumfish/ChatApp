@@ -99,14 +99,15 @@ public class MainActivity extends AppCompatActivity {
         ref= FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
 
         /***
-         * 共同聊天室
+         * 共同聊天室 (原先設定個別視窗)
          ***/
-        ref.addValueEventListener(new ValueEventListener() {
+        ref.addValueEventListener(new ValueEventListener() { //一直存在的listener (如果改profile img就會立刻更新)
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User user = snapshot.getValue(User.class);
                 userName=user.getUsername();
-                username.setText(user.getUsername());
+                //username.setText(user.getUsername());
+                username.setText("Chat room");
 
                 if(user.getImageURL().equals("default")){
                     profile_img.setImageResource(R.mipmap.ic_launcher);
@@ -160,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
         mChat=new ArrayList<>();
 
         ref=FirebaseDatabase.getInstance().getReference("Chats");
-        ref.addValueEventListener(new ValueEventListener() {
+        ref.addValueEventListener(new ValueEventListener() { //現在會不斷刷新
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 mChat.clear();
