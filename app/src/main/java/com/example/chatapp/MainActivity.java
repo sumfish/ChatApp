@@ -30,6 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -120,12 +121,8 @@ public class MainActivity extends AppCompatActivity {
     private void sendMessage(String sender, String receiver, String message){
         DatabaseReference reference= FirebaseDatabase.getInstance().getReference();
 
-        HashMap<String, Object> hashmap= new HashMap<>(); //firebase那邊的結構體
-        hashmap.put("sender",sender);
-        hashmap.put("receiver",receiver);
-        hashmap.put("message",message);
-
-        reference.child("Chats").push().setValue(hashmap); //丟到firebase
+        long time =new Date().getTime();
+        reference.child("Chats").push().setValue(new Chat(sender,receiver,message,time)); //丟到firebase
     }
 
     @Override

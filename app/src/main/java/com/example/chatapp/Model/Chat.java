@@ -10,12 +10,13 @@ public class Chat {
     private String sender;
     private long msgTime;
 
-    public Chat(String sender, String messag) { //要跟firebase裡的setting一樣
+    public Chat(String sender, String receiver, String messag, long time) { //要跟firebase裡的setting一樣
         this.sender = sender;
         this.receiver =receiver;
         this.messag= messag;
+        this.msgTime=time;
 
-        msgTime= new Date().getTime();
+        //msgTime= new Date().getTime();
     }
 
     public Chat(){

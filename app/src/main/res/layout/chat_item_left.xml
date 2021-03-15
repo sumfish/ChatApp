@@ -22,4 +22,15 @@
         android:textSize="18sp"
         android:background="@drawable/background_left"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/show_message"
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="3dp"
+        android:text="pm"
+        android:padding="2dp"
+        android:id="@+id/msg_time"
+        android:textSize="10sp" />
+
 </RelativeLayout>

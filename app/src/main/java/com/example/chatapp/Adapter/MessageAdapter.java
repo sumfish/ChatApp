@@ -16,7 +16,10 @@ import com.example.chatapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Date;
 import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> {
 
@@ -51,6 +54,12 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         Chat chat=mChats.get(position);
         holder.show_msg.setText(chat.getMessage());
 
+        /**
+         * 可以再想想日期的部分
+         * */
+        String sendTime= new SimpleDateFormat("hh:mm a", Locale.ENGLISH).format(chat.getMsgTime());
+        holder.msg_time.setText(sendTime);
+
         if(imageurl.equals("default")){
             holder.profile_img.setImageResource(R.mipmap.ic_launcher);
         }else{
@@ -67,11 +76,13 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
         public TextView show_msg;
         public ImageView profile_img;
+        public TextView msg_time;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             show_msg=itemView.findViewById(R.id.show_message);
             profile_img=itemView.findViewById(R.id.profile_image);
+            msg_time=itemView.findViewById(R.id.msg_time);
         }
     }
 
