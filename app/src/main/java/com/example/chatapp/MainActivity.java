@@ -142,6 +142,11 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) { //sign out
         switch(item.getItemId()){ //menu中的選擇只放sign out
 
+            case R.id.profile:
+                startActivity(new Intent(MainActivity.this,PorfileActivity.class));
+                //finish(); //不能destroy掉 原本的task會消失就跳不回來
+                return true;
+
             case R.id.logout:
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(MainActivity.this,StartActivity.class));
