@@ -16,6 +16,19 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/profile_image"
         android:layout_marginLeft="5dp"
+        android:text="name"
+        android:textStyle="bold"
+        android:textColor="#2C8A2C"
+        android:id="@+id/sendername"
+        android:textSize="8sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/profile_image"
+        android:layout_below="@+id/sendername"
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="5dp"
         android:text="hello"
         android:padding="8dp"
         android:id="@+id/show_message"
@@ -27,10 +40,10 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/show_message"
         android:layout_marginLeft="1dp"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="10dp"
         android:text="pm"
         android:padding="2dp"
         android:id="@+id/msg_time"
-        android:textSize="10sp" />
+        android:textSize="9sp" />
 
 </RelativeLayout>

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -53,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
 
+    String userName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,9 +84,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String msg=txt_send.getText().toString();
                 if(!msg.equals("")){
-                    //not assign receiver
-                    //如果開個人聊天室的話 可以用intent包 對象userid過來
-                    sendMessage(firebaseUser.getUid(),"",msg);
+                    /** not assign receiver
+                     *如果開個人聊天室的話 可以用intent包 對象userid過來
+                     **/
+                    // firebaseUser.getDisplayName()會拿不到，firebase auth不會存資料
+                    sendMessage(firebaseUser.getUid(),"",userName,msg);
                 }else{
                     Toast.makeText(MainActivity.this," You can't not send empty message",Toast.LENGTH_SHORT).show();
                 }
@@ -100,7 +105,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User user = snapshot.getValue(User.class);
+                userName=user.getUsername();
                 username.setText(user.getUsername());
+
                 if(user.getImageURL().equals("default")){
                     profile_img.setImageResource(R.mipmap.ic_launcher);
                 }else{
@@ -118,11 +125,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void sendMessage(String sender, String receiver, String message){
+    private void sendMessage(String sender, String receiver, String senderName, String message){
         DatabaseReference reference= FirebaseDatabase.getInstance().getReference();
 
         long time =new Date().getTime();
-        reference.child("Chats").push().setValue(new Chat(sender,receiver,message,time)); //丟到firebase
+        reference.child("Chats").push().setValue(new Chat(sender,receiver, message, senderName, time)); //丟到firebase
     }
 
     @Override

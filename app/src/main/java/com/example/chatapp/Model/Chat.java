@@ -6,14 +6,16 @@ public class Chat {
 
 
     private String receiver; //個人聊天室的話可加 receiver
-    private String messag;
+    private String message;
     private String sender;
+    private String senderName;
     private long msgTime;
 
-    public Chat(String sender, String receiver, String messag, long time) { //要跟firebase裡的setting一樣
+    public Chat(String sender, String receiver, String message, String senderName, long time) { //要跟firebase裡的setting一樣
         this.sender = sender;
         this.receiver =receiver;
-        this.messag= messag;
+        this.message= message;
+        this.senderName=senderName;
         this.msgTime=time;
 
         //msgTime= new Date().getTime();
@@ -23,8 +25,12 @@ public class Chat {
 
     }
 
+    public String getSenderName() {
+        return senderName;
+    }
+
     public String getMessage() {
-        return messag;
+        return message;
     }
 
     public String getReceiver() {
@@ -41,7 +47,7 @@ public class Chat {
     }
 
     public void setMessage(String message) {
-        this.messag = message;
+        this.message = message;
     }
 
     public void setReceiver(String receiver) {
