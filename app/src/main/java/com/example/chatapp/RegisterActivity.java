@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.chatapp.Model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -66,7 +67,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    private void register(final String username, String email, String password){ //sign up new user
+    private void register(final String username, final String email, String password){ //sign up new user
         auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -76,12 +77,14 @@ public class RegisterActivity extends AppCompatActivity {
 
                     ref = FirebaseDatabase.getInstance().getReference("Users").child(userid);
 
+                    /*
                     HashMap<String, String> haskMap = new HashMap<>();
                     haskMap.put("id", userid);
                     haskMap.put("username", username);
                     haskMap.put("imageURL", "default");
+                    */
 
-                    ref.setValue(haskMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    ref.setValue(new User(userid,username,email,"default")).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {

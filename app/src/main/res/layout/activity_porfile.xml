@@ -45,8 +45,9 @@
                 android:layout_below="@+id/profile_image"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
+                android:textStyle="bold"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:id="@+id/username"/>
 
             <TextView
@@ -57,8 +58,8 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="10dp"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="18sp"
+                android:textColor="#6DBF6D"
+                android:textSize="12sp"
                 android:id="@+id/useremail"/>
 
 

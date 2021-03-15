@@ -52,7 +52,8 @@ public class PorfileActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User user=snapshot.getValue(User.class); //用class承接fireabase 儲存的data
                 username.setText(user.getUsername());
-                //email.setText(user.e);
+                email.setText(user.getEmail());
+
                 if(user.getImageURL().equals("default")){
                     img_profile.setImageResource(R.mipmap.ic_launcher);
                 }else{
