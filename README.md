@@ -14,11 +14,11 @@
 ### Chat Room Overview
 - Each message will be showed with time stamp and the seen infomation. 
   
-<img src="./screenshots/chatroom.PNG" alt="chatroom" width="300" height="450"/>
+<img src="./screenshots/chatroom.PNG" alt="chatroom"/>
 
 - Edit your profile photo
   - click the profile photo, you can choose a image from your device and upload for update the photo.
-  - 
+  
 <img src="./screenshots/profile.PNG" alt="profile" width="300"/> <img src="./screenshots/profile2.PNG" alt="profile2" width="300"/>
 
 
@@ -33,4 +33,4 @@
 
 - The Menu for jumping to profile page/ logout the app
 
-<img src="./screenshots/menu.PNG" alt="menu" width="250" height="400"/>
+<img src="./screenshots/menu.PNG" alt="menu"/>
