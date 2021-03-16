@@ -8,11 +8,13 @@
 - Start the app
   - Choose register/login when using the app for the first time.
   - Next time when you open this app, it will be signed in automatically.
-<img src="./screenshots/startscene.PNG" alt="chatroom" width="400"/>
+  
+<img src="./screenshots/startscene.PNG" alt="chatroom" width="200" height="400"/>
 
 - Chat Room Overview
   - Each message will be showed with time stamp and the seen infomation. 
-<img src="./screenshots/chatroom.PNG" alt="chatroom" width="400"/>
+  
+<img src="./screenshots/chatroom.PNG" alt="chatroom" width="400" height="400"/>
 
 - Edit your profile photo
   - click the profile photo, you can choose a image from your device and upload for update the photo.
