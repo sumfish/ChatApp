@@ -50,7 +50,19 @@
             android:text="pm"
             android:padding="2dp"
             android:id="@+id/msg_time"
-            android:textSize="8sp" />
+            android:textSize="10sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/msg_time"
+            android:layout_toLeftOf="@+id/show_message"
+            android:layout_marginRight="1dp"
+            android:layout_marginTop="1dp"
+            android:text=""
+            android:padding="2dp"
+            android:id="@+id/msg_seen"
+            android:textSize="10sp" />
 
     </RelativeLayout>
 </RelativeLayout>

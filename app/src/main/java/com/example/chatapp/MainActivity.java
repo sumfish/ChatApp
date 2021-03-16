@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -33,6 +34,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -56,6 +58,12 @@ public class MainActivity extends AppCompatActivity {
 
     String userName;
 
+    // local storage
+    SharedPreferences sharedPreferences;
+
+    // seen/unseen fun
+    ValueEventListener seenListener;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
         username=findViewById(R.id.user_name);
         btn_send=findViewById(R.id.btn_send);
         txt_send=findViewById(R.id.text_send);
+
+        sharedPreferences = getSharedPreferences("chatapp", MODE_PRIVATE);
 
         firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
 
@@ -113,10 +123,39 @@ public class MainActivity extends AppCompatActivity {
                     profile_img.setImageResource(R.mipmap.ic_launcher);
                 }else{
                     //load img with URL
-                    Glide.with(MainActivity.this).load(user.getImageURL()).into(profile_img);
+                    Glide.with(getApplicationContext()).load(user.getImageURL()).into(profile_img);
                 }
 
                 readMessage(firebaseUser.getUid(),"",user.getImageURL());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        seenMessage();
+    }
+
+    private void seenMessage(){
+        ref=FirebaseDatabase.getInstance().getReference("Chats");
+        seenListener=ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot shot:snapshot.getChildren()){
+                    Chat chat=shot.getValue(Chat.class);
+                    String fuserID =firebaseUser.getUid();
+                    if(!chat.getSender().equals(fuserID )){  //只要自己不是寄件人
+                        HashMap<String,Boolean> seenMap=chat.getSeenPeople();
+                        if(!seenMap.containsKey(fuserID)) { //將自己id加入看過的map
+                            HashMap<String,Object> map=new HashMap<>();
+                            seenMap.put(fuserID,true);
+                            map.put("seenPeople",seenMap);
+                            shot.getRef().updateChildren(map);
+                        }
+                    }
+                }
             }
 
             @Override
@@ -130,7 +169,9 @@ public class MainActivity extends AppCompatActivity {
         DatabaseReference reference= FirebaseDatabase.getInstance().getReference();
 
         long time =new Date().getTime();
-        reference.child("Chats").push().setValue(new Chat(sender,receiver, message, senderName, time)); //丟到firebase
+        HashMap map=new HashMap<String,Boolean>();
+        map.put("default",false);
+        reference.child("Chats").push().setValue(new Chat(sender,receiver, message, senderName, map, time)); //丟到firebase
     }
 
     @Override
@@ -185,5 +226,12 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    //
+    @Override
+    protected void onPause() {
+        super.onPause();
+        ref.removeEventListener(seenListener);
     }
 }

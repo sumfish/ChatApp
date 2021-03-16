@@ -91,6 +91,13 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             }
         });
 
+        //已讀顯示
+        //if(position==mChats.size()-1) //如果只在最新一則顯示的話
+        if(chat.getSeenPeople().size()>1){
+            holder.msg_seen.setText("已讀"+(chat.getSeenPeople().size()-1));
+        }else{
+            holder.msg_seen.setVisibility(View.GONE);
+        }
 
     }
 
@@ -106,6 +113,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         public ImageView profile_img;
         public TextView msg_time;
         public TextView sender_name;
+        public TextView msg_seen;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -114,6 +122,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             profile_img=itemView.findViewById(R.id.profile_image);
             msg_time=itemView.findViewById(R.id.msg_time);
             sender_name=itemView.findViewById(R.id.sendername);
+            msg_seen=itemView.findViewById(R.id.msg_seen);
         }
     }
 

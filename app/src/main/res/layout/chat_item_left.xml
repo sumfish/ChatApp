@@ -20,7 +20,7 @@
         android:textStyle="bold"
         android:textColor="#2C8A2C"
         android:id="@+id/sendername"
-        android:textSize="8sp" />
+        android:textSize="9sp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -44,6 +44,19 @@
         android:text="pm"
         android:padding="2dp"
         android:id="@+id/msg_time"
-        android:textSize="9sp" />
+        android:textSize="10sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/msg_time"
+        android:layout_toRightOf="@+id/show_message"
+        android:layout_marginRight="1dp"
+        android:layout_marginTop="1dp"
+        android:text="seen"
+        android:padding="2dp"
+        android:id="@+id/msg_seen"
+        android:textSize="8sp"
+        android:visibility="gone"/>
 
 </RelativeLayout>
