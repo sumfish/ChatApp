@@ -14,10 +14,10 @@
 ### Chat Room Overview
 - Each message will be showed with time stamp and the seen infomation. 
   
-<img src="./screenshots/chatroom.PNG" alt="chatroom"/>
+<img src="./screenshots/chatroom.PNG" alt="chatroom" height="400px" width="250px"/>
 
-- Edit your profile photo
-  - click the profile photo, you can choose a image from your device and upload for update the photo.
+### Edit your profile photo
+  - click the profile photo, you can choose a image from your device and upload for updating the photo.
   
 <img src="./screenshots/profile.PNG" alt="profile" width="300"/> <img src="./screenshots/profile2.PNG" alt="profile2" width="300"/>
 
