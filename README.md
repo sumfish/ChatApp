@@ -12,7 +12,7 @@
 <img src="./screenshots/startscene.PNG" alt="startscene" width="350" height="550"/>
 
 ### Chat Room Overview
-- Each message will be showed with time stamp and the seen infomation. 
+- Each message will be showed with the time stamp and the info that how many people have seen this message. 
   
 <img src="./screenshots/chatroom.PNG" alt="chatroom" width="500" height="800"/>
 
