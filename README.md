@@ -14,7 +14,7 @@
 ### Chat Room Overview
 - Each message will be showed with the time stamp and the info that how many people have seen this message. 
   
-<img src="./screenshots/chatroom.PNG" alt="chatroom" width="500" height="800"/>
+<img src="./screenshots/chatroom_v2.PNG" alt="chatroom" width="500" height="800"/>
 
 ### Edit your profile photo
   - click the profile photo, you can choose a image from your device and upload for updating the photo.
